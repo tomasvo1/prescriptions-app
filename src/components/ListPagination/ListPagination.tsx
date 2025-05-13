@@ -47,7 +47,7 @@ function ListPagination() {
 					<ArrowLeft />
 				</IconButton>
 
-				<span className="text-body-2">
+				<span>
 					{count > 0
 						? `${from}-${to} out of ${count}`
 						: '0 out of 0'
