@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a simple prescriptions application with 2 pages - prescriptions list and prescription details
 
 ## Getting Started
 
-First, run the development server:
+For local development:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm i & npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Brief overview
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This application includes custom hooks, components, contexts, stub api actions.
 
-## Learn More
+Application's architecture is set up to be modular and scalable. Pretty much every single directory under `src/` is meant to contain reusable items to help you build application faster, cleaner and have one source of truth
 
-To learn more about Next.js, take a look at the following resources:
+`src/components`, `src/hooks` - Reusable UI components (e.g. Page wrapper)
+`src/hooks` - Custom hooks
+`src/contexts` - React providers
+`src/types` - Centralized types. As explained in one comment, these types ideally could be shared with backend via contracts library
+`src/utils` - Utility functions
+`src/styles` - Style related dir, currently contains MUI theme
+`src/apiActions` - API related logic. Currently has prescription api call stubs, but I imagine certain endpoints could be called numerous times in different places, thus having all your api actions in one place seems reduces risk of errors if payload/query/response/slugs changes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Every dir has index.ts files for barrel exports to have single sources.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`PaginationContext` is set up in the way you could pass an api call to it and forget managing state manually, hence a good approach to scale if application needs more paginated lists.
 
-## Deploy on Vercel
+For accessibility in this application, I rely on MUI components, semantic HTML when possible and labeling components when necessary. MUI is quite accessible out of the box and provides proper keyboard navigation using tab button or arrow keys. One area of improvement could be aria labels, double checking colour contrasts in case of colour-blind users (consult WCAG contrast ratios).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Real world extension
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+In a real world scenario, I would add some sort of navigation - be it header or aside nav. Core routes/links would be within that navigation e.g. `Your prescriptions`, `Profile`, `Medicines`, `Shipping` etc. Different pages/views would be stored under `src/app`, alongside `prescriptions`. 
+
+`Page.tsx` (under `src/componens`) could ensure that every page looks identical in terms of heading, paddings.
+
+For more control over the state I'd create `AuthContext` to manage profile information of the user.
+
+Possible extension could happen in the field of localisation, I'd use `react-i18next` (or similar lib) to manage translations and possibly create some sort of `LanguageContext` to manage selected language and pretty much everything related to localisations (e.g. tr() function could be stored in the context rather than imported from the lib directly, once again, to have a single source of truth with possibility of extending functionality).
+
+In regards to style, I'd add tailwind config with defined breakpoints, colour palletes, fonts etc., to have centralised styling.
