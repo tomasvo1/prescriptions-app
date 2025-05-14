@@ -30,6 +30,7 @@ function ListPagination() {
 				value={meta.size || 10}
 				size="small"
 				className="sm:w-36 w-full"
+				aria-label="Select page sizes"
 				onChange={(e) => setPageSize(+e.target.value)}
 			>
 				{entriesPerPageOptions.map((x, idx) => (
@@ -39,7 +40,7 @@ function ListPagination() {
 
 			<div className="flex items-center gap-4">
 				<IconButton
-					aria-label="previous"
+					aria-label="Go to previous page"
 					disabled={page ? page <= 1 : true}
 					color="primary"
 					onClick={() => page ? setPage(+page - 1) : undefined}
@@ -55,7 +56,7 @@ function ListPagination() {
 				</span>
 
 				<IconButton
-					aria-label="next"
+					aria-label="Go to next page"
 					color="primary"
 					disabled={page && pageCount ? page >= pageCount : true}
 					onClick={() => page ? setPage(+page + 1) : undefined}

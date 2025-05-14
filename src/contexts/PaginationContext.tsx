@@ -21,6 +21,7 @@ type IFetcher<T extends unknown[], E> = (...args: T) => IFetcherReturn<E>;
 
 type IContext<Q extends IPaginationQuery, E = unknown> = IPaginatedResult<E> & {
 	isFetching: boolean;
+	query: Partial<Record<keyof IPaginationQuery, string>>;
 	setQuery: (query: Partial<Record<keyof IPaginationQuery, string>>) => void;
 	setPage: (page: Q['page']) => void;
 	setPageSize: (pageSize: Q['size']) => void;
@@ -84,6 +85,7 @@ function PaginationProvider<Q extends IPaginationQuery, E>({
 		isFetching,
 		items: result?.items as E[] || [],
 		meta: result?.meta || metaFallback,
+		query: params,
 		setPage,
 		setPageSize,
 		setQuery,

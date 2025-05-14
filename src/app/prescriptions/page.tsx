@@ -30,9 +30,9 @@ function PrescriptionsView() {
 
 
 function Prescriptions() {
-	const { items, isFetching, setQuery } = usePagination<IFindPrescriptionsRequestQuery, IPrescription>();
+	const { items, isFetching, query, setQuery } = usePagination<IFindPrescriptionsRequestQuery, IPrescription>();
 
-	const [searchTerm, setSearchTerm] = useState('');
+	const [searchTerm, setSearchTerm] = useState(query.search || '');
 
 	useDebounce(searchTerm, () => setQuery({ search: searchTerm }), 300);
 
@@ -42,6 +42,7 @@ function Prescriptions() {
 				<TextField
 					value={searchTerm}
 					placeholder="Search..."
+					aria-label="Search prescriptions"
 					size="small"
 					onChange={e => setSearchTerm(e.target.value)}
 				/>
@@ -49,7 +50,7 @@ function Prescriptions() {
 
 			{isFetching && (
 				<div className="block mx-auto">
-					<CircularProgress />
+					<CircularProgress aria-label="Loading prescriptions list" />
 				</div>
 			)}
 
@@ -57,7 +58,11 @@ function Prescriptions() {
 				<EmptyContentPlaceholder />
 			)}
 
-			<Paper classes={{ root: paperClassName }} component="ul">
+			<Paper
+				classes={{ root: paperClassName }}
+				component="ul"
+				aria-label="Prescription list"
+			>
 				{items.length > 0 && items.map(prescription => (
 					<li
 						key={prescription.id}
@@ -82,7 +87,7 @@ function Prescriptions() {
 								variant="outlined"
 								component={Link}
 								href={`/prescriptions/${prescription.id}`}
-								aria-label="prescription-details"
+								aria-label={`View details for ${prescription.medicineName}`}
 								className="sm:w-auto w-full"
 							>
 								View details

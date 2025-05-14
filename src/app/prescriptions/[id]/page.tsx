@@ -55,7 +55,7 @@ function PrescriptionDetails() {
 
 	if (isPrescriptionLoading) {
 		return (
-			<CircularProgress className="block mx-auto" />
+			<CircularProgress className="block mx-auto" aria-label="Loading prescription details" />
 		);
 	}
 
@@ -70,6 +70,7 @@ function PrescriptionDetails() {
 						href="/prescriptions"
 						className="md:w-auto w-full"
 						startIcon={<ArrowLeft />}
+						aria-label="Back to prescriptions list"
 					>
 						Back to prescriptions
 					</Button>
@@ -83,6 +84,7 @@ function PrescriptionDetails() {
 							<Button
 								className="md:w-auto w-full"
 								onClick={() => requestRefill(prescription.id)}
+								aria-label={`Request a refill for ${prescription.medicineName}`}
 							>
 								Request a refill
 							</Button>

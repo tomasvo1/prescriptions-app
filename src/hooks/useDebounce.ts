@@ -8,10 +8,11 @@ export function useDebounce<T = any>(
 	delay: number = DEFAULT_DELAY,
 ) {
 	const debounce = useRef<number | undefined>(undefined);
-	const render = useRef<number>(1);
+	const didMount = useRef(false);
 
 	useEffect(() => {
-		if (render.current++ === 1) {
+		if (!didMount.current) {
+			didMount.current = true;
 			return;
 		}
 
