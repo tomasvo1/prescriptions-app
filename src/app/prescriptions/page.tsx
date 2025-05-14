@@ -45,11 +45,12 @@ function Prescriptions() {
 					aria-label="Search prescriptions"
 					size="small"
 					onChange={e => setSearchTerm(e.target.value)}
+					fullWidth
 				/>
 			</Paper>
 
 			{isFetching && (
-				<div className="block mx-auto">
+				<div className="block mx-auto min-h-14">
 					<CircularProgress aria-label="Loading prescriptions list" />
 				</div>
 			)}
@@ -59,7 +60,7 @@ function Prescriptions() {
 			)}
 
 			<Paper
-				classes={{ root: paperClassName }}
+				classes={{ root: `${paperClassName} min-h-32` }}
 				component="ul"
 				aria-label="Prescription list"
 			>
