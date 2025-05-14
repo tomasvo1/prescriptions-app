@@ -20,7 +20,7 @@ export default function RootLayout({
 			<head>
 				<title>Prescriptions app</title>
 				<meta
-					name="Prescriptions app"
+					name="description"
 					content="View prescriptions and order refills"
 				/>
 			</head>
