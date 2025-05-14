@@ -10,6 +10,9 @@ npm i & npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+For your convenience, app is deployed in vercel, you can access it using this url:
+`https://prescriptions-app.vercel.app/`
+
 ## Brief overview
 
 This application includes custom hooks, components, contexts, stub api actions.
