@@ -10,12 +10,12 @@ interface IInfoRow {
 
 function InfoRow({ label, children }: PropsWithChildren<IInfoRow>) {
 	return (
-		<div className="flex flex-col">
+		<dl className="flex flex-col">
 			<dt className="text-xs font-medium text-neutral-600">{label}</dt>
 			<dd className="break-words text-md font-medium">
 				{children || '-'}
 			</dd>
-		</div>
+		</dl>
 	);
 }
 

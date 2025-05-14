@@ -17,6 +17,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<title>Prescriptions app</title>
 			<body className="min-h-screen sm:p-6 p-4">
 				<SnackbarsProvider>
 					<AppRouterCacheProvider>
